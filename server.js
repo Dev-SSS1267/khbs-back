@@ -8,10 +8,6 @@ const issueRoutes = require("./routes/issueRoutes"); // 추가한 라우트
 
 const app = express();
 
-app.use(express.json());
-require("dotenv").config();
-connectDB();
-
 app.use("/api/auth", authRoutes);
 app.use("/api/notices", noticeRoutes);
 app.use("/api/schedules", scheduleRoutes);
@@ -26,6 +22,10 @@ app.use(cors({
   methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization", "Origin", "Accept"],
 }));
+
+app.use(express.json());
+require("dotenv").config();
+connectDB();
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
