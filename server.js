@@ -9,10 +9,14 @@ const issueRoutes = require("./routes/issueRoutes"); // 추가한 라우트
 const app = express();
 
 const cors = require("cors");
+const allowedOrigins = [
+  "http://localhost:5173",   // 로컬 개발 서버
+  "https://your-production-link.com" // 실제 배포 URL
+];
 
 // CORS 설정 - 반드시 서버 초기 설정에 포함
 app.use(cors({
-  origin: "*", // 모든 출처 허용 - Postman 테스트용으로 모든 origin 허용
+  origin: allowedOrigins, // 모든 출처 허용 - Postman 테스트용으로 모든 origin 허용
   credentials: true,
   methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization", "Origin", "Accept"],
