@@ -19,7 +19,13 @@ app.use("/api/issues", issueRoutes); // 문의 라우트 추가
 
 const cors = require("cors");
 
-app.use(cors());
+
+app.use(cors({
+  origin: (origin, callback) => {
+    callback(null, origin || '*'); // 요청된 origin을 그대로 허용합니다.
+  },
+  credentials: true, // 자격 증명을 포함하여 요청 허용
+}));
 // const allowedOrigins = [
 //   "http://localhost:5173",           // 개발 서버 주소
 //   "https://your-production-link.com"  // 실제 배포 URL
