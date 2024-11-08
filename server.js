@@ -19,14 +19,22 @@ app.use("/api/issues", issueRoutes); // 문의 라우트 추가
 
 const cors = require("cors");
 const allowedOrigins = [
-  "http://localhost:5173",   // 로컬 개발 서버
-  "https://khbs.kyunggi.club" // 실제 배포 URL
+  "http://localhost:5173",           // 개발 서버 주소
+  "https://your-production-link.com"  // 실제 배포 URL
 ];
 
 app.use(cors({
-  origin: allowedOrigins,
-  credentials: true, // 쿠키를 포함한 요청 허용
+  origin: function (origin, callback) {
+    // 요청의 출처가 allowedOrigins에 포함되어 있거나, undefined(예: 서버 간 요청)인 경우 허용
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true, // 자격 증명을 포함한 요청 허용 설정
 }));
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
