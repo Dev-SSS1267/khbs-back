@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { register, login, getUserInfo, getUserById } = require("../controllers/authController");
+const { authenticate, isAdmin } = require("../middleware/authMiddleware");
 
 // 회원가입
 router.post("/register", register);
