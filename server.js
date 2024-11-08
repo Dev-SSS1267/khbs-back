@@ -26,6 +26,15 @@ app.use(cors({
   },
   credentials: true, // 자격 증명을 포함하여 요청 허용
 }));
+
+// OPTIONS 요청에 대한 처리 (Preflight 요청 허용)
+app.options("*", (req, res) => {
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.sendStatus(200);
+});
 // const allowedOrigins = [
 //   "http://localhost:5173",           // 개발 서버 주소
 //   "https://your-production-link.com"  // 실제 배포 URL
