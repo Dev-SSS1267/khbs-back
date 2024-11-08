@@ -18,7 +18,15 @@ app.use("/api/schedules", scheduleRoutes);
 app.use("/api/issues", issueRoutes); // 문의 라우트 추가
 
 const cors = require("cors");
-app.use(cors({ origin: "https://khbs.kyunggi.club" }));
+const allowedOrigins = [
+  "http://localhost:5173",   // 로컬 개발 서버
+  "https://khbs.kyunggi.club" // 실제 배포 URL
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true, // 쿠키를 포함한 요청 허용
+}));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
