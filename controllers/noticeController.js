@@ -43,17 +43,21 @@ exports.updateNotice = async (req, res) => {
   }
 };
 
-// 공지사항 삭제
+//공지사항 삭제
 exports.deleteNotice = async (req, res) => {
-  const { id } = req.params;
-
   try {
-    const notice = await Notice.findById(id);
-    if (!notice) return res.status(404).json({ message: "Notice not found" });
+    const noticeId = req.params.id;
 
-    await notice.remove();
-    res.json({ message: "Notice deleted" });
+    // 공지사항 삭제
+    const deletedNotice = await Notice.findByIdAndDelete(noticeId);
+
+    if (!deletedNotice) {
+      return res.status(404).json({ message: "Notice not found" });
+    }
+
+    res.status(200).json({ message: "Notice deleted successfully" });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Error deleting notice:", error); // 오류 로그 출력
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
