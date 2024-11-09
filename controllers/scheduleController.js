@@ -49,10 +49,11 @@ exports.deleteSchedule = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const schedule = await Schedule.findById(id);
-    if (!schedule) return res.status(404).json({ message: "Schedule not found" });
+    const schedule = await Schedule.findByIdAndDelete(id);
+    if (!schedule) {
+      return res.status(404).json({ message: "Schedule not found" });
+    }
 
-    await schedule.remove();
     res.json({ message: "Schedule deleted" });
   } catch (error) {
     res.status(500).json({ message: error.message });
