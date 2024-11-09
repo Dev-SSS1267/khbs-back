@@ -22,6 +22,18 @@ exports.addIssue = async (req, res) => {
   }
 };
 
+// 특정 문의 조회
+exports.getIssue = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const issue = await Issue.findById(id);
+    if (!issue) return res.status(404).json({ message: "Issue not found" });
+    res.json(issue);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // 답변 등록
 exports.addResponse = async (req, res) => {
   const { id } = req.params;
