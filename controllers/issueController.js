@@ -12,9 +12,9 @@ exports.getIssues = async (req, res) => {
 
 // 새로운 문의 등록
 exports.addIssue = async (req, res) => {
-  const { title, description } = req.body;
+  const { title, description, location } = req.body;
   try {
-    const newIssue = new Issue({ title, description });
+    const newIssue = new Issue({ title, description, location });
     await newIssue.save();
     res.status(201).json(newIssue);
   } catch (error) {
