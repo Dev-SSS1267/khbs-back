@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const ScheduleSchema = new mongoose.Schema({
-  author: { type: String, required: true, unique: true },
+  author: { type: String, required: true },
   title: { type: String, required: true },
   content: { type: String, required: true },
   createDate: { type: Date, default: Date.now },
