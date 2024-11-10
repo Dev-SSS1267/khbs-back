@@ -12,9 +12,9 @@ exports.getSchedules = async (req, res) => {
 
 // 스케줄 등록
 exports.addSchedule = async (req, res) => {
-  const { author, title, period, content, date, img } = req.body;
+  const { author, title, period, date, img } = req.body;
   try {
-    const newSchedule = new Schedule({ author, title, period, content, date, img });
+    const newSchedule = new Schedule({ author, title, period, date, img });
     await newSchedule.save();
     res.status(201).json(newSchedule);
   } catch (error) {
@@ -25,14 +25,13 @@ exports.addSchedule = async (req, res) => {
 // 스케줄 수정
 exports.updateSchedule = async (req, res) => {
   const { id } = req.params;
-  const { title, content, period, date, img } = req.body;
+  const { title, period, date, img } = req.body;
 
   try {
     const schedule = await Schedule.findById(id);
     if (!schedule) return res.status(404).json({ message: "Schedule not found" });
 
     if (title) schedule.title = title;
-    if (content) schedule.content = content;
     if (period) schedule.period = period;
     if (date) schedule.date = date;
     if (img) schedule.img = img;
