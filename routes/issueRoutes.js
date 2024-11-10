@@ -20,6 +20,9 @@ router.get("/:id", getIssue);
 // 문의에 대한 답변 추가
 router.post("/:id/response", addResponse);
 
+// 문의 삭제
+router.delete("/:id", deleteIssue);
+
 
 // 문의 수정
 router.put("/:id", updateIssue);
