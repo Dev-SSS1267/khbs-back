@@ -37,7 +37,7 @@ exports.getSong = async (req, res) => {
 // 공지사항 수정
 exports.updateSong = async (req, res) => {
   const { id } = req.params;
-  const { title, artist } = req.body;
+  const { title, artist, done } = req.body;
 
   try {
     const Song = await Song.findById(id);
@@ -45,6 +45,7 @@ exports.updateSong = async (req, res) => {
 
     if (title) Song.title = title;
     if (artist) Song.artist = artist;
+    if (done) Song.done = done;
     Song.createDate = Date.now();
 
     await Song.save();
