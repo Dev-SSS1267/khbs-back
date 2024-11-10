@@ -3,8 +3,8 @@ const Song = require("../models/Song");
 // 모든 공지사항 조회
 exports.getSongs = async (req, res) => {
   try {
-    const Songs = await Song.find().sort({ createDate: -1 });
-    res.json(Songs);
+    const songs = await Song.find().sort({ createDate: -1 });
+    res.json(songs);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -26,34 +26,36 @@ exports.addSong = async (req, res) => {
 exports.getSong = async (req, res) => {
   const { id } = req.params;
   try {
-    const Song = await Song.findById(id);
-    if (!Song) return res.status(404).json({ message: "Song not found" });
-    res.json(Song);
+    const songGet = await Song.findById(id);
+    if (!songGet) return res.status(404).json({ message: "Song not found" });
+    res.json(songGet);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-// 공지사항 수정
 exports.updateSong = async (req, res) => {
   const { id } = req.params;
-  const { title, artist, done } = req.body;
+  const { done } = req.body; // done 필드는 Boolean 타입
 
   try {
-    const Song = await Song.findById(id);
-    if (!Song) return res.status(404).json({ message: "Song not found" });
+    // ID로 노래 찾기
+    const songUpdate = await Song.findById(id);
+    if (!sonUpdateg) return res.status(404).json({ message: "Song not found" });
 
-    if (title) Song.title = title;
-    if (artist) Song.artist = artist;
-    if (done) Song.done = done;
-    Song.createDate = Date.now();
+    // done 필드가 Boolean이면 업데이트
+    if (typeof done === 'boolean') songUpdate.done = done;
+    sonUpdateg.createDate = Date.now();
 
-    await Song.save();
-    res.json(Song);
+    // 변경 사항 저장
+    await songUpdate.save();
+    res.json(songUpdate);
   } catch (error) {
+    console.error("Error updating song:", error);
     res.status(500).json({ message: error.message });
   }
 };
+
 
 //공지사항 삭제
 exports.deleteSong = async (req, res) => {
