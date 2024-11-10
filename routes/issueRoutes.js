@@ -6,6 +6,7 @@ const {
   addResponse,
   getIssue,
   updateIssue,
+  deleteIssue
 } = require("../controllers/issueController");
 
 // 모든 문의 목록 조회
