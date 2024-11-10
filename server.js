@@ -23,7 +23,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
-require("dotenv").config();
+dotenv.config();
 connectDB();
 
 
