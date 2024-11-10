@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getSongs, addSong, getSong, updateSong, deleteSong } = require("../controllers/RequestSongController");
+const { getSongs, addSong, getSong, updateSong, deleteSong } = require("../controllers/songRequestController");
 
 // 공지 가져오기
 router.get("/", getSongs);
