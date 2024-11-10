@@ -41,11 +41,11 @@ exports.updateSong = async (req, res) => {
   try {
     // ID로 노래 찾기
     const songUpdate = await Song.findById(id);
-    if (!sonUpdate) return res.status(404).json({ message: "Song not found" });
+    if (!songUpdate) return res.status(404).json({ message: "Song not found" });
 
     // done 필드가 Boolean이면 업데이트
     if (typeof done === 'boolean') songUpdate.done = done;
-    sonUpdate.createDate = Date.now();
+    songUpdate.createDate = Date.now();
 
     // 변경 사항 저장
     await songUpdate.save();
