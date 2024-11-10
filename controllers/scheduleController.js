@@ -12,9 +12,9 @@ exports.getSchedules = async (req, res) => {
 
 // 스케줄 등록
 exports.addSchedule = async (req, res) => {
-  const { author, title, content, date, img } = req.body;
+  const { author, title, period, content, date, img } = req.body;
   try {
-    const newSchedule = new Schedule({ author, title, content, date, img });
+    const newSchedule = new Schedule({ author, title, period, content, date, img });
     await newSchedule.save();
     res.status(201).json(newSchedule);
   } catch (error) {
@@ -25,7 +25,7 @@ exports.addSchedule = async (req, res) => {
 // 스케줄 수정
 exports.updateSchedule = async (req, res) => {
   const { id } = req.params;
-  const { title, content, date, img } = req.body;
+  const { title, content, period, date, img } = req.body;
 
   try {
     const schedule = await Schedule.findById(id);
@@ -33,6 +33,7 @@ exports.updateSchedule = async (req, res) => {
 
     if (title) schedule.title = title;
     if (content) schedule.content = content;
+    if (period) schedule.period = period;
     if (date) schedule.date = date;
     if (img) schedule.img = img;
     schedule.createDate = Date.now();
