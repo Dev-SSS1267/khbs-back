@@ -5,6 +5,7 @@ import authRoutes from "./routes/authRoutes";
 import noticeRoutes from "./routes/noticeRoutes";
 import scheduleRoutes from "./routes/scheduleRoutes";
 import issueRoutes from "./routes/issueRoutes"; // 추가한 라우트
+import songRoutes from "./routes/songRoutes"; // 추가한 라우트
 
 import cors from "cors";
 
@@ -32,6 +33,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/notices", noticeRoutes);
 app.use("/api/schedules", scheduleRoutes);
 app.use("/api/issues", issueRoutes); // 문의 라우트 추가
+app.use("/api/songs", songRoutes); // 노래 라우트 추가
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
