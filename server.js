@@ -1,14 +1,15 @@
-const express = require("express");
-const connectDB = require("./config/db");
-const dotenv = require("dotenv");
-const authRoutes = require("./routes/authRoutes");
-const noticeRoutes = require("./routes/noticeRoutes");
-const scheduleRoutes = require("./routes/scheduleRoutes");
-const issueRoutes = require("./routes/issueRoutes"); // 추가한 라우트
+import express from "express";
+import connectDB from "./config/db";
+import dotenv from "dotenv";
+import authRoutes from "./routes/authRoutes";
+import noticeRoutes from "./routes/noticeRoutes";
+import scheduleRoutes from "./routes/scheduleRoutes";
+import issueRoutes from "./routes/issueRoutes"; // 추가한 라우트
+
+import cors from "cors";
 
 const app = express();
 
-const cors = require("cors");
 const allowedOrigins = [
   "http://localhost:5173",   // 로컬 개발 서버
   "https://khbs.kyunggi.club" // 실제 배포 URL
