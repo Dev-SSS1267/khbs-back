@@ -71,10 +71,10 @@ exports.updateIssue = async (req, res) => {
 
 // 문의 삭제
 exports.deleteIssue = async (req, res) => {
-  const { issueId } = req.params;
+  const { id } = req.params;
 
   try {
-    const deleteIssues = await Issue.findByIdAndDelete(issueId);
+    const deleteIssues = await Issue.findByIdAndDelete(id);
 
     if (!deleteIssues) {
       return res.status(404).json({ message: "Issue not found" });
@@ -82,7 +82,7 @@ exports.deleteIssue = async (req, res) => {
 
     res.status(200).json({ message: "Issue deleted successfully" });
   } catch (error) {
-    console.error("Error deleting notice:", error); // 오류 로그 출력
+    console.error("Error deleting issue:", error); // 오류 로그 출력
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
